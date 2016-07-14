@@ -27,6 +27,8 @@ function Paper(settings, themeSettings, assembler) {
 
     self.handlebars = Handlebars.create();
 
+    self.snippets = {};
+
     self.handlebars.templates = {};
     self.translate = null;
     self.inject = {};
@@ -108,6 +110,28 @@ Paper.prototype.getTemplateProcessor = function () {
 
         return precompiledTemplates;
     }
+};
+
+Paper.prototype.loadSnippets = function (snippets) {
+    var self = this;
+
+    console.log('snippetssnippetssnippets', snippets);
+
+    _.each(snippets, function (snippet) {
+        var precompiledTemplate;
+
+        if (!_.isArray(self.snippets[snippet.snippetName])) {
+            self.snippets[snippet.snippetName] = [];
+        }
+
+        eval('precompiledTemplate = ' + snippet.precompiled);
+
+        snippet.render = self.handlebars.template(precompiledTemplate);
+
+        self.snippets[snippet.snippetName].push(snippet);
+    });
+
+    console.log(self.snippets);
 };
 
 /**
