@@ -10,7 +10,7 @@ function helper(paper) {
         if (_.isArray(snippets)) {
             _.each(snippets, function (snippet) {
                 var c = snippet.render(this, { data: options.hash });
-                content += '<div data-snippet-block="' + snippet.id + '">\n' + c + '\n</div>';
+                content += '<div  data-snippet-id="' + snippet.id + '" data-snippet-name="' + snippet.blockName + '">\n' + c + '\n</div>';
             })
         }
 
